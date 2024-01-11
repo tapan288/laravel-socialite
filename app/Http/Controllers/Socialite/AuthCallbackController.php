@@ -4,11 +4,12 @@ namespace App\Http\Controllers\Socialite;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Laravel\Socialite\Facades\Socialite;
 
 class AuthCallbackController extends Controller
 {
     public function __invoke()
     {
-        dd('AuthCallbackController');
+        dd(Socialite::driver('twitter')->user());
     }
 }
