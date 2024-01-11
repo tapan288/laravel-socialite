@@ -11,18 +11,13 @@ use Laravel\Socialite\Facades\Socialite;
 
 class AuthCallbackController extends Controller
 {
-    public function __invoke($service)
+    public function __invoke($service, SocialiteService $socialiteService)
     {
-        $user = Socialite::driver($service)->user();
+        $user = $socialiteService
+            ->forService($service)
+            ->create(Socialite::driver($service)->user());
 
-        dd(app(SocialiteService::class)->forService($service));
-
-        auth()->login(User::firstOrCreate([
-            'x_id' => $user->getId(),
-        ], [
-            'name' => $user->getName(),
-            'email' => $user->getEmail(),
-        ]));
+        auth()->login($user);
 
         return redirect(RouteServiceProvider::HOME);
     }
