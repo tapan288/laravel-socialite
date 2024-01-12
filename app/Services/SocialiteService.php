@@ -2,6 +2,7 @@
 
 namespace App\Services;
 
+use App\Actions\Socials\CreateGithubUser;
 use App\Actions\Socials\CreateTwitterUser;
 
 class SocialiteService
@@ -10,7 +11,7 @@ class SocialiteService
     {
         return match ($service) {
             'twitter' => new CreateTwitterUser(),
-            'github' => 'createGithubUser',
+            'github' => new CreateGithubUser(),
             default => throw new \Exception('Invalid service provided'),
         };
     }
