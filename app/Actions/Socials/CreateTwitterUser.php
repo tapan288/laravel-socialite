@@ -4,7 +4,7 @@ namespace App\Actions\Socials;
 
 use App\Models\User;
 
-class CreateTwitterUser
+class CreateTwitterUser implements Contracts\CreatesUser
 {
     public function create($user): User
     {
