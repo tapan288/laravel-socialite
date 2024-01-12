@@ -19,7 +19,6 @@ class AuthCallbackController extends Controller
             ->create(Socialite::driver($service)->user());
 
         if ($user->wasRecentlyCreated) {
-            info('user was create');
             event(new Registered($user));
         }
 
